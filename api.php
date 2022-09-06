@@ -18,7 +18,7 @@ if (isset($_GET['api'])) {
     $fecha = date('d-m-Y');
     $domain = $_GET['domain'];
 
-    $sql = "INSERT INTO storagex2 (`id`, `username`, `identify`, `redireccion`, `img`, `title`, `descripcion`, `fecha`, `domain`) VALUES (null, :username, :identify, :api, :img, :title, :descripcion, :fecha, :domain);";
+    $sql = "INSERT INTO storage (`id`, `username`, `identify`, `redireccion`, `img`, `title`, `descripcion`, `fecha`, `domain`) VALUES (null, :username, :identify, :api, :img, :title, :descripcion, :fecha, :domain);";
     $registro = $pdo->prepare($sql);
     $registro->bindParam(':username', $username);
     $registro->bindParam(':identify', $identify);
